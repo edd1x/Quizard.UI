@@ -1,0 +1,12 @@
+nav {
+    background-color: #232931 !important;
+}
+nav ul li a {
+    color: #f1f1f1;
+}
+nav ul li a:hover {
+    color: #0F79A1;
+}
+.dropdown-item {
+    color: #040404 !important;
+}

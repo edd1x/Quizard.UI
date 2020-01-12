@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-md bg-dark navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="#"><img src="../../../assets/images/tacta_logo_neg.png" alt="Tacta" width="150" ></a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navb"
+      aria-expanded="true">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navb" class="navbar-collapse collapse hide">
+    
+
+      <ul class="nav navbar-nav ml-auto">
+        <li class="nav-item pr-2">
+          <a class="nav-link" *ngIf="isUserAuthenticated()" routerLink="/">Homepage</a>
+        </li>
+        <li class="nav-item pr-2">
+          <a class="nav-link" *ngIf="isUserAuthenticated()" routerLink="/questions">Questions Overview</a>
+        </li>
+        <li class="nav-item" *ngIf="!isUserAuthenticated()"><a class="nav-link" routerLink="/login"><span
+              class="fas fa-sign-in-alt"></span> Login</a></li>
+              <li class="nav-item dropdown" *ngIf="isUserAuthenticated()">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <b>{{username}}</b>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="" (click)="logOut()">Log Out</a>
+                </div>
+              </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
