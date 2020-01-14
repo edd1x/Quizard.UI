@@ -1,3 +1,4 @@
 export interface ICategory {
-  category: string;
+  id:number;
+  categoryName: string;
 }
