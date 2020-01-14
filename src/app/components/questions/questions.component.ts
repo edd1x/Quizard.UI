@@ -20,6 +20,7 @@ export class QuestionsComponent implements OnInit {
   form: FormGroup;
   formattedMessage: string;
   category: ICategory[];
+  newCategory:string;
   CategoryInt: number []=[];
   constructor(private fb: FormBuilder, private questionService: QuestionService,
      private toastr: ToastrService, private categoryService: CategoryService) { }
@@ -28,7 +29,7 @@ export class QuestionsComponent implements OnInit {
     this.fetchData();
     this.form = this.fb.group({
       Text: this.fb.control('', Validators.required),
-      categoryArray:[],
+      Categories:[],
       answers: this.fb.array(
         [this.answerGroup(), this.answerGroup()],
         [ CustomValidators.minLengthOfValidAnswers(1), Validators.required]
@@ -67,15 +68,30 @@ categoryGroup():FormGroup{
     return this.form.get('categoryArray') as FormArray;
   }
   addAnotherCategory() {
-    this.model.push(this.form.value.categoryArray.categoryName);
-    this.CategoryInt.push(this.form.value.categoryArray.id);
+ 
+      if (this.form.value.Categories.id == null)
+      {
+        this.newCategory = this.form.value.Categories;
+        console.log(this.newCategory);
+        var nova = {
+          categoryName :this.newCategory
+        }
+        var nova2 = JSON.stringify(nova);
+        console.log(nova2);
+        this.categoryService.postCategory(nova2).subscribe(response=>this.CategoryInt.push(Number.parseInt(response.toString())));
+        this.model.push(this.newCategory);
+      }
+      else{
 
-    JSON.stringify(this.model);
-    this.categoryArray.reset();
-    console.log(this.model);
-    console.log(this.CategoryInt);
+      this.model.push(this.form.value.Categories.categoryName);
+      this.CategoryInt.push(this.form.value.Categories.id);
 
-    
+      JSON.stringify(this.model);
+      console.log(this.model);
+      console.log(this.CategoryInt);
+     
+    }
+    this.form.value.Categories.reset;
   }
 
 
@@ -94,16 +110,15 @@ categoryGroup():FormGroup{
   get removeButtonDisabled(): boolean {
     return this.answersArray.length === 2;
   }
-  get categories(){
-    JSON.stringify(this.model);
-    return this.model;
-  }
+ 
   removeAnswer(i: number) {
     this.answersArray.removeAt(i);
   }
   addQuestion(form) {
-    form.categoryArray=this.CategoryInt;
-    const credentials = JSON.stringify(form.value);
+    let nesto = form.value;
+    nesto.Categories = this.CategoryInt;
+    console.log(nesto);
+    const credentials = JSON.stringify(nesto);
     
     this.questionService.checkAuth(credentials).subscribe(response => {
       this.toastr.success('Inserted to database!', 'Success');
