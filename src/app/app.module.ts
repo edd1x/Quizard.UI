@@ -1,3 +1,4 @@
+import { CategoryComponent } from './components/category/category.component';
 import { QuestionsComponent } from './components/questions/questions.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -15,7 +16,6 @@ import { AuthGuard } from './services/guards/auth-guard.service';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 
-
 export function tokenGetter() {
    return localStorage.getItem("jwt");
  }
@@ -26,7 +26,8 @@ export function tokenGetter() {
       LoginComponent,
       HomeComponent,
       QuestionsComponent,
-      NavbarComponent
+      NavbarComponent,
+      CategoryComponent
    ],
    imports: [
       BrowserModule,

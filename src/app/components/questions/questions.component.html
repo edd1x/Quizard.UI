@@ -7,21 +7,9 @@
       </label>
       <input type="text" formControlName="Text" class="form-control" />
     </div>
+    <app-category [Categoriess]="form" ></app-category>
     <hr>
-    <label>
-      Categories:
-    </label>
-    <div id="listCategories" class="col-12 list-group list-group-horizontal">
-      <button (click)=removeCategory(cat) class="list-group-item list-group-item-primary" data-toggle="tooltip"
-        title="Click to unassign category from question" *ngFor="let cat of categoryNames">{{ cat }}</button>
-    </div>
-    <div class="row">
-      <div class="col-12">
-        <input id="typeahead-basic" formControlName="Categories" type="text" class="form-control"
-          [inputFormatter]="formatter" [resultFormatter]="formatter" [ngbTypeahead]="search" />
-        <span><button class="btn btn-primary" type="submit" (click)=addAnotherCategory()>Add category</button></span>
-      </div>
-    </div>
+
     <hr>
 
     <div formArrayName="answers" *ngFor="let item of answersArray.controls; let i = index">

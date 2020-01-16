@@ -18,7 +18,7 @@ url: string = environment.api + '/api/Categories';
 constructor(private http: HttpClient) { }
 
 public getAll() {
-  return this.http.get(this.url);
+  return this.http.get(this.url)
   }
 public postCategory(categoryName : string) {
     return this.http.post(this.url,categoryName, httpOptions);
