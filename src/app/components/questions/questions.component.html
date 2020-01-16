@@ -1,47 +1,47 @@
 <app-navbar></app-navbar>
-<div class="container">
+<div class="container ">
   <div [formGroup]="form" class="form-group">
     <div class="form-group">
       <label>
         Question:
       </label>
-      <input type="text" formControlName="Text"  class="form-control" />
+      <input type="text" formControlName="Text" class="form-control" />
     </div>
     <hr>
     <label>
       Categories:
     </label>
+    <div id="listCategories" class="col-12 list-group list-group-horizontal">
+      <button (click)=removeCategory(cat) class="list-group-item list-group-item-primary" data-toggle="tooltip"
+        title="Click to unassign category from question" *ngFor="let cat of categoryNames">{{ cat }}</button>
+    </div>
     <div class="row">
       <div class="col-12">
-        {{model | json}}
-        <input id="typeahead-basic"  formControlName="Categories" 
-        type="text" class="form-control" 
-        [inputFormatter]="formatter"
-       [resultFormatter]="formatter"
-        [ngbTypeahead]="search" />
-            </div> <span><button type="submit" (click)=addAnotherCategory() 
-              >Add category</button></span>
-            <pre>{{ formStatus | json }}</pre>
-    </div>  
-    <div>
+        <input id="typeahead-basic" formControlName="Categories" type="text" class="form-control"
+          [inputFormatter]="formatter" [resultFormatter]="formatter" [ngbTypeahead]="search" />
+        <span><button class="btn btn-primary" type="submit" (click)=addAnotherCategory()>Add category</button></span>
+      </div>
     </div>
     <hr>
-    
+
     <div formArrayName="answers" *ngFor="let item of answersArray.controls; let i = index">
       <div [formGroupName]="i" class="form-row">
         <div class="form-group col-md-9">
           <label>
-          {{i+1}}. Answer:</label>
-            <input type="text" formControlName="Text" class="form-control" />
-            
+            {{i+1}}. Answer:</label>
+          <input type="text" formControlName="Text" class="form-control" />
+
         </div>
-        <div class="form-group custom-control custom-checkbox col-md-2 pl-4 align-self-end d-flex justify-content-center">
-          <input type="checkbox" formControlName="IsCorrect" class="form-control custom-control-input" id="correct-{{i}}" [checked]=""/>
-          <label class="custom-control-label" for="correct-{{i}}" >Valid</label>
+        <div
+          class="form-group custom-control custom-checkbox col-md-2 pl-4 align-self-end d-flex justify-content-center">
+          <input type="checkbox" formControlName="IsCorrect" class="form-control custom-control-input"
+            id="correct-{{i}}" [checked]="" />
+          <label class="custom-control-label" for="correct-{{i}}">Valid</label>
 
         </div>
         <div class="form-group col-md-1 align-self-end">
-          <button (click)="removeAnswer(i)" [disabled]="removeButtonDisabled" class="form-control btn btn-danger">Remove</button>
+          <button (click)="removeAnswer(i)" [disabled]="removeButtonDisabled"
+            class="form-control btn btn-danger">Remove</button>
         </div>
       </div>
     </div>
@@ -49,12 +49,14 @@
   <br />
   <div>
     <div *ngIf="answersArray.errors" class="alert alert-danger">
-      <div *ngIf="answersArray.errors.minLengthOfValidAnswers.foundAnswers > 1">You can check only one correct answer!</div>
-      <div *ngIf="answersArray.errors.minLengthOfValidAnswers.foundAnswers < 1">You need to check one correct answer!</div>
+      <div *ngIf="answersArray.errors.minLengthOfValidAnswers.foundAnswers > 1">You can check only one correct answer!
+      </div>
+      <div *ngIf="answersArray.errors.minLengthOfValidAnswers.foundAnswers < 1">You need to check one correct answer!
+      </div>
     </div>
     <button (click)="addAnotherAnswer()" class="btn btn-primary mr-2">Add Answer</button>
     <button class="btn btn-success" (click)=addQuestion(form) [disabled]="addQuestionButtonDisable">Submit</button>
   </div>
   <div>
-    
+
   </div>

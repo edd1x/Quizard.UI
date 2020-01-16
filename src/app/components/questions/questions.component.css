@@ -1,4 +1,22 @@
 .container {
     position: relative;
     padding-top: 30px;
-}
+  }
+  
+  #listCategories {
+    padding: 0 !important;
+    margin-bottom: 15px;
+  }
+  
+  #typeahead-basic {
+    margin-bottom: 15px;
+  }
+  
+  .categories {
+    margin-top: 6px !important;
+    margin-bottom: 6px !important;
+  }
+  
+  .list-group-item {
+    padding: .375rem .75rem !important;
+  }
